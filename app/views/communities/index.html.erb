@@ -1,0 +1,11 @@
+<div class="col-sm-8">  
+  <% @communities.each |community| %>
+    <div class="card">
+      <%= link_to community.name, community_path %>
+      <%= simple_format community.rules %>
+    </div>
+  <% end %>
+</div>
+<div class="col-sm-4">
+  <%= link_to "Create New Community", new_community_path, class: "btn btn-outline-primary" %>
+</div>

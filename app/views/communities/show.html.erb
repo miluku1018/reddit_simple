@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-sm-8">
+    <%= @community.name %>
+  </div>
+  <div class="col-sm-4">
+    <%= link_to "Create New Post", new_community_post_path(@community), class: "btn btn-primary float-right" %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="col-sm-1"></div>
+      <div class="col-sm-11">
+        <% @posts.each |post| %>
+          <div class="h4"><%= link_to post.title, community_post_path %></div>
+          <p><%= @community.name %> Post by <%= @account.full_name%></p>
+          <p><%= post.body %></p>
+        <% end %>
+      </div>  
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <p class="h4">About this community</p>
+      <p></p>
+      <p></p>
+    </div>
+    <small>
+      <p>
+        Do not post spam links
+        <br>
+        Please respec other users at all times
+      </p>
+    </small>
+  </div>
+</div>
