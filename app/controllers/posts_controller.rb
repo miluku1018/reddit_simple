@@ -1,27 +1,38 @@
 class PostsController < ApplicationController
+  before_actioin :set_post, only: [:show]
   def index
-    @psots = Post.all 
+    @posts = Post.all 
   end
 
   def new
+    @community = Community.find(params[:community_id])
     @post = Post.new
   end
 
   def create
     @post = Post.new(post_params)
+    @post.account_id = current_account.id
+    @post.community_id = params[:community_id]
+
     if @post.save
-      redirect_to psots_path, notice: "Create post successfully"
+      redirect_to community_path(@post.community_id)
     else
+      @community = Community.find(params[:community_id])
       render :new
     end
   end
 
   def show
- 
+    @comment = Comment.new
+  end
+
+  private
+  def set_post
+    @post = Post.includes(:comments).find(params[:id])
   end
  
   def post_params
-    params.require(:post).permit(:title, :body, :upvotes, :downvotes)
+    params.require(:post).permit(:title, :body)
   end
 
 end
