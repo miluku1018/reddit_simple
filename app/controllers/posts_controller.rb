@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show]
+  before_action :auth_subscriber, only: [:new]
   def index
     @posts = Post.all 
   end
@@ -31,6 +32,12 @@ class PostsController < ApplicationController
     @post = Post.includes(:comments).find(params[:id])
   end
  
+  def auth_subscriber
+    unless Subscription.where(community_id: params[:community_id], account_id: current_account.id).any?
+      redirect_to root_path, flash: {danger: "You are not authorized to view this page"}
+    end
+  end
+
   def post_params
     params.require(:post).permit(:title, :body)
   end

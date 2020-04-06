@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-1"></div>
       <div class="col-11">
-        <h4><%= linkt_to post.title, community_post_path(post.community_id, post) %></h4>
+        <h4><%= link_to post.title, community_post_path(post.community_id, post) %></h4>
         <p><small><%= link_to post.community.name, community_path(post.community) %>
           Posted by <%= link_to post.account.full_name, profile_path(post.account.username) %>
           <%= time_ago_in_words post.created_at %> ago.
