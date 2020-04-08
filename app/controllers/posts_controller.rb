@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :authenticate_account!, except: [:index, :show]
   before_action :set_post, only: [:show]
   before_action :auth_subscriber, only: [:new]
   def index
